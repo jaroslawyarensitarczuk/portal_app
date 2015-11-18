@@ -1,0 +1,95 @@
+<?php
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="articles")
+ */
+
+class Article {
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $categoryId;
+
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="Musisz podać tytuł!")
+     * @Assert\Length(min=3, max=70,
+     * minMessage="Tytuł artykułu musi składać się z co najmniej {{ limit }} znaków!",
+     * maxMessage="Tytuł artykuły może składać się maksymalnie z {{ limit }} znaków!")
+     */
+    protected $title;
+
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="Musisz zamieścić opis!")
+     * @Assert\Length(min=3, max=255,
+     * minMessage="Opis musi zawierać co najmniej {{ limit }} znaków!",
+     * maxMessage="Opis może zawierać maksymalnie {{ limit }} znaków!")
+     */
+    protected $description;
+
+    /**
+     * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Nie możesz zamieścić pustego artykułu/opowiadania!")
+     * @Assert\Length(min=10,
+     * minMessage="Artykuł/opowiadanie musi zawierać co najmniej {{ limit }} znaków!")
+     */
+    protected $content;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    protected $date;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $authorId;
+
+    /**
+     * @ORM\Column(type="smallint")
+     */
+    protected $articleType;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $grade = 0;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $comments = 0;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    protected $lastCommentId;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    protected $lastCommentDate;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    protected $lastCommentAuthor;
+
+    /**
+     * @ORM\Column(type="string", length=4)
+     */
+    protected $headerImgExt = "png";
+}

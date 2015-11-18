@@ -1,0 +1,66 @@
+<?php
+namespace AppBundle\Entity;
+
+use Doctrine\Orm\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="settings")
+ */
+
+class Settings {
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="Musisz podać tytuł portalu!")
+     */
+    protected $portalTitle;
+
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="Musisz podać opis!")
+     */
+    protected $portalDescription;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $keywords;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $usersTotal = 0;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $articlesTotal = 0;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $storiesTotal = 0;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    protected $announce;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    protected $footer;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $maxPm = 20;
+}

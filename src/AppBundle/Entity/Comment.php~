@@ -1,0 +1,38 @@
+<?php
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="comments")
+ */
+
+class Comment {
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $authorId;
+
+    /**
+     * @ORM\Column(type="date")
+     * @Assert\DateTime()
+     */
+    protected $data;
+
+    /**
+     * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Nie możesz zamieścić pustego komentarza!")
+     * @Assert\Length(min=10,
+     * minMessage="Komentarz musi zawierać co najmniej {{ limit }} znaków!")
+     */
+    protected $content;
+}

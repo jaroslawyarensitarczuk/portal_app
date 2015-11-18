@@ -1,0 +1,139 @@
+<?php
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="users")
+ */
+
+class User {
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="string", length=35)
+     * @Assert\NotBlank(message="Musisz podać login!")
+     * @Assert\Length(min=5, max=35,
+     * minMessage="Login musi składać się z co najmniej {{ limit }} znaków!",
+     * maxMessage="Login może składać się maksymalnie z {{ limit }} znaków!")
+     */
+    protected $login;
+
+    /**
+     * @ORM\Column(type="string", length=32)
+     * @Assert\NotBlank(message="Musisz podać hasło!")
+     * @Assert\Length(min=8,
+     * minMessage="Hasło musi zawierać co najmniej {{ limit }} znaków!")
+     */
+    protected $password;
+
+    /**
+     * @ORM\Column(type="string", length=40)
+     */
+    protected $passwordHash;
+
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\Email(checkMX=true,
+     * message="Podany adres e-mail jest nieprawidłowy!")
+     */
+    protected $email;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    protected $registerDate;
+
+    /**
+     * @ORM\Column(type="smallint")
+     */
+    protected $accountStatus = 1;
+
+    /**
+     * @ORM\Column(type="smallint")
+     */
+    protected $usersGroup = 0;
+
+    /**
+     * @ORM\Column(type="smallint")
+     */
+    protected $isOnline = 0;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $lastOnline = "Nigdy";
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $articles = 0;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $stories = 0;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $reputation = 0;
+
+    /**
+     * @ORM\Column(type="string", length=4)
+     */
+    protected $avatarExt = "png";
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $signature;
+
+    /**
+     * @ORM\Column(type="string", length=1, nullable=true)
+     */
+    protected $sex;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    protected $realName;
+
+    /**
+     * @ORM\Column(type="date")
+     * @Assert\LessThanOrEqual("-16 years", message="Musisz mieć co najmniej 16 lat żeby korzystać z portalu!")
+     */
+    protected $birthDate;
+
+    /**
+     * @ORM\Column(type="string", length=3)
+     */
+    protected $age;
+
+    /**
+     * @ORM\Column(type="string", length=70, nullable=true)
+     */
+    protected $city;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $hobbies;
+
+    /**
+     * @ORM\Column(type="string", length=20, nullable=true)
+     */
+    protected $ggNumber;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $skypeId;
+}
